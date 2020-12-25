@@ -1,0 +1,23 @@
+
+alex,23, ingeniero, jugar
+alexjandrohum,45, ingeniero en sistemas, jugar, Dibujar
+juan,12, Spiderman, sad, we
+Manuel,34, doctor, jugar, dormir, pelear
+Pedro,34, Mecanico, dormir, jugar, pelear
+Maria,34, abogada, dormir
+Mauricio,54, doctor, bailar
+Pepe,14, MArio bros, Chavo, Barbie
+Brenda,45, Enfermera, curar
+Verna,17, batman, sad, das
+Manuel,34, Veterinario, Comer, dormir
+Juan,13, America, Avemgers
+Uriel,34, Medico, comer
+Pepes,1, superman, safd
+nombre1,323, sd, wd
+Rpberto,54, arquitecto, dormir, comer
+Gonzalo,15, MArio, Spiderman
+MArio,45, juan, jugar
+Peralta,14, Goku, Gato
+Mario,34, Ingeniero, Ver movies
+Juan,12, Flash, Goku, Pantera rosa
+juan,12, dwd, dw, wqd
