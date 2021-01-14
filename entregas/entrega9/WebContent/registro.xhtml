@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+<!-- PrimeNG style dependencies -->
+<link rel="stylesheet"
+	href="https://unpkg.com/primeng@4.3.0/resources/themes/omega/theme.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="https://unpkg.com/primeng@4.3.0/resources/primeng.min.css" />
+<!-- 1. Load libraries -->
+<!-- Polyfill for older browsers -->
+<script src="https://unpkg.com/core-js/client/shim.min.js"></script>
+
+<script src="https://unpkg.com/zone.js@0.8.4?main=browser"></script>
+<script src="https://unpkg.com/reflect-metadata@0.1.8"></script>
+<script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
+<h:outputStylesheet name="primeicons/primeicons.css"
+	library="primefaces" />
+<h:outputStylesheet library="webjars"
+	name="font-awesome/5.12.0/css/all.min-jsf.css" />
+<h:outputStylesheet library="webjars"
+	name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+</head>
+<body>
+	<h:form id="loginForm">
+		<p:panel id="loginPnl" header="Registro"
+			style="width: 500px; margin: 0 auto;">
+			<h:panelGrid id="loginPanel" columns="2" cellpadding="5">
+				<h:outputText value="Nombre" />
+				<p:inputText value="#{registro.nombre}"></p:inputText>
+				<p:spacer />
+				<p:spacer />
+				<h:outputText value="Apellidos" />
+				<p:inputText value="#{registro.apellidos}"></p:inputText>
+				<p:spacer />
+				<p:spacer />
+				<h:outputText value="Direccion" />
+				<p:inputText value="#{registro.direccion}"></p:inputText>
+				<p:spacer />
+				<p:spacer />
+				<h:outputText value="Telefono" />
+				<p:inputText value="#{registro.telefono}"></p:inputText>
+				<p:spacer />
+				<p:spacer />
+				<h:outputText value="Especialidad" />
+				<p:inputText value="#{registro.especialidad}"></p:inputText>
+				<p:spacer />
+				<p:spacer />
+				<h:outputText value="Rfc" />
+				<p:inputText value="#{registro.rfc}"></p:inputText>
+				<p:spacer />
+				<p:spacer />
+				<p:outputLabel value="Sexo:" />
+				<h:selectOneRadio value="#{registro.sexo}">
+					<f:selectItem itemValue="Hombre" itemLabel="Hombre" />
+					<f:selectItem itemValue="Mujer" itemLabel="Mujer" />
+				</h:selectOneRadio>
+				<p:spacer />
+				<p:spacer />
+				<h:outputText value="Correo" />
+				<p:inputText value="#{registro.correo}"></p:inputText>
+				<p:spacer />
+				<p:spacer />
+				<h:outputText value="Contraseña" />
+				<p:inputText value="#{registro.contra}"></p:inputText>
+				<p:spacer />
+				<p:spacer />
+			</h:panelGrid>
+			<h:panelGrid columns="1" cellpadding="10" width="100%">
+				<p:commandButton id="loginButton"
+					action="#{registro.registarDoctor()}" value="Registrar"
+					update="loginForm" style="float: right;">
+				</p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+		<p:blockUI block="loginPnl" trigger="loginButton" style="float:right;">
+		</p:blockUI>
+	</h:form>
+</body>
+</html>

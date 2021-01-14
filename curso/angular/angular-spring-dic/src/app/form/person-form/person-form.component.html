@@ -1,0 +1,53 @@
+<div class="card" style="width: 500px;">
+    <div class="card-body">
+        <h5 class="card-title">Person Form</h5>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input #nameInput type="text" class="form-control" placeholder="Ingresa ty nombre">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <input #nameLocation type="text" class="form-control" placeholder="Ingresa tu localidad">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input #namePhone type="text" class="form-control" placeholder="Ingresa tu celular">
+            </div>
+            <button (click)="add(nameInput.value, nameLocation.value, namePhone.value, $event)" class="btn btn-primary">Submit</button>
+        </form>
+        <div class="form-group">
+            <h5>Personas:</h5>
+            {{list| json}}
+        </div>
+        <div class="container">
+            <table class="default">
+
+                <tr>
+
+                    <td>Nombre</td>
+
+                    <td>Localidad</td>
+
+                    <td>Telfono</td>
+
+                    <td>Remove</td>
+
+                </tr>
+
+                <tr *ngFor="let person of list">
+
+                    <td>{{person.name}}</td>
+
+                    <td>{{person.location}}</td>
+
+                    <td>{{person.phone}}</td>
+
+                    <td><button (click)="remove(person.name, $event)">Delete</button></td>
+
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>

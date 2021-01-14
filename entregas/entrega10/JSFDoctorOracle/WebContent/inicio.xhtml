@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Insert title here</title>
+	<!-- PrimeNG style dependencies -->
+	<link rel="stylesheet"
+		href="https://unpkg.com/primeng@4.3.0/resources/themes/omega/theme.css" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link rel="stylesheet"
+		href="https://unpkg.com/primeng@4.3.0/resources/primeng.min.css" />
+	<!-- 1. Load libraries -->
+	<!-- Polyfill for older browsers -->
+	<script src="https://unpkg.com/core-js/client/shim.min.js"></script>
+
+	<script src="https://unpkg.com/zone.js@0.8.4?main=browser"></script>
+	<script src="https://unpkg.com/reflect-metadata@0.1.8"></script>
+	<script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+	<h:outputStylesheet library="webjars"
+		name="font-awesome/5.12.0/css/all.min-jsf.css" />
+	<h:outputStylesheet library="webjars"
+		name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+		<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+		crossorigin="anonymous" />
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+		integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+		crossorigin="anonymous" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+		integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+		crossorigin="anonymous" />
+	<!-- jQuery and JS bundle w/ Popper.js -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+		crossorigin="anonymous"></script>
+
+</h:head>
+<h:body>
+
+	<p:panel id="basic" header="Bienvenido Doctor(a):"
+		footer="Fecha: #{login.fecha}" style="margin-bottom:20px">
+		<h:panelGrid columns="2" cellpadding="10">
+			<p:graphicImage
+				url="https://majcohealth.com/public/frontend/images/doctor.jpg"
+				height="100" width="100" />
+			<h:outputText
+				value="#{login.doctor.nombre} #{login.doctor.apellidos}" />
+			<h:outputText value="Información" style="font-weight:bold" />
+			<p:spacer />
+			<h:outputText value="Dirección: #{login.doctor.direccion}" />
+			<p:spacer />
+			<h:outputText value="Especialidad: #{login.doctor.especialidad}" />
+			<p:spacer />
+			<h:outputText value="Rfc: #{login.doctor.rfc}" />
+			<p:spacer />
+			<h:outputText value="Sexo: #{login.doctor.sexo}" />
+		</h:panelGrid>
+	</p:panel>
+	<br />
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="card">
+
+					<div class="card-header">Crear horario</div>
+					<div class="card_body">
+						<h:form method="post" modelAttribute="horario">
+							<div class="container">
+								<div class="form-row align-items-center">
+									<div class="col-auto my-1">
+										<label class="mr-sm-5" for="inlineFormCustomSelect">Semanas</label>
+										<h:selectOneMenu value="#{inicio.semana}"
+											class="custom-select mr-sm-5">
+											<f:selectItems value="#{inicio.semanas}"></f:selectItems>
+										</h:selectOneMenu>
+									</div>
+								</div>
+							</div>
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<div class="form-group row">
+											<h:outputText class="col-sm-5 col-form-label" value="Dia" />
+											<div class="col-sm-4"></div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group row">
+											<div class="col-sm-4">
+												<h:outputText value="Hora inicio" />
+											</div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group row">
+
+											<div class="col-sm-5">
+												<h:outputText value="Hora termino" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<div class="form-group row">
+											<h:outputText class="col-sm-5 col-form-label" value="Lunes" />
+											<p:inputText type="hidden" value="#{inicio.diaLunes}"></p:inputText>
+											<div class="col-sm-4"></div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group row">
+											<div class="col-sm-4">
+												<p:inputText class="form-control" value="#{inicio.inicioL}"></p:inputText>
+											</div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group row">
+
+											<div class="col-sm-4">
+												<p:inputText class="form-control" value="#{inicio.terminoL}"></p:inputText>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<div class="form-group row">
+											<h:outputText class="col-sm-5 col-form-label" value="Martes" />
+											<p:inputText type="hidden" value="#{inicio.diaMartes}"></p:inputText>
+											<div class="col-sm-4"></div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group row">
+											<div class="col-sm-4">
+												<p:inputText class="form-control" value="#{inicio.inicioM}"></p:inputText>
+											</div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group row">
+
+											<div class="col-sm-4">
+												<p:inputText class="form-control" value="#{inicio.terminoM}"></p:inputText>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<div class="form-group row">
+											<h:outputText class="col-sm-5 col-form-label"
+												value="Miercoles" />
+											<p:inputText type="hidden" value="#{inicio.diaMiercoles}"></p:inputText>
+											<div class="col-sm-4"></div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group row">
+											<div class="col-sm-4">
+												<p:inputText class="form-control"
+													value="#{inicio.inicioMie}"></p:inputText>
+											</div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group row">
+
+											<div class="col-sm-4">
+												<p:inputText class="form-control"
+													value="#{inicio.terminoMie}"></p:inputText>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<div class="form-group row">
+											<h:outputText class="col-sm-5 col-form-label" value="Jueves" />
+											<p:inputText type="hidden" value="#{inicio.diaJueves}"></p:inputText>
+											<div class="col-sm-4"></div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group row">
+											<div class="col-sm-4">
+												<p:inputText class="form-control" value="#{inicio.inicioJ}"></p:inputText>
+											</div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group row">
+
+											<div class="col-sm-4">
+												<p:inputText class="form-control" value="#{inicio.terminoJ}"></p:inputText>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<div class="form-group row">
+											<h:outputText class="col-sm-5 col-form-label" value="Viernes" />
+											<p:inputText type="hidden" value="#{inicio.diaviernes}"></p:inputText>
+											<div class="col-sm-4"></div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group row">
+											<div class="col-sm-4">
+												<p:inputText class="form-control" value="#{inicio.inicioV}"></p:inputText>
+											</div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group row">
+
+											<div class="col-sm-4">
+												<p:inputText class="form-control" value="#{inicio.terminoV}"></p:inputText>
+											</div>
+										</div>
+									</div>
+								</div>
+								<label class="text-danger">${inicio.mensaje}</label>
+							</div>
+							<h:panelGrid columns="1" cellpadding="10" width="100%">
+								<p:commandButton action="#{inicio.crearHorario}" value="Crear"
+									style="float: right;">
+								</p:commandButton>
+							</h:panelGrid>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<br/>
+	<footer style="background: gray;">
+		<ui:include src="/template/common/commonFooter.xhtml" />
+	</footer>
+	<br />
+</h:body>
+</html>

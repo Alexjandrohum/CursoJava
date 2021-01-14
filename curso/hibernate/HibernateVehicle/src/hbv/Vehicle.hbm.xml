@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28/12/2020 01:40:11 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="hbv.Vehicle" table="VEHICLE">
+        <id name="vehicleNo" type="string">
+            <column name="VEHICLE_NO" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="color" type="string">
+            <column name="COLOR" length="10" />
+        </property>
+        <property name="wheel" type="big_decimal">
+            <column name="WHEEL" precision="22" scale="0" />
+        </property>
+        <property name="seat" type="big_decimal">
+            <column name="SEAT" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

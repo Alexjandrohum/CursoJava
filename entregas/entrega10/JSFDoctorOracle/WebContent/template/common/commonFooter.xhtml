@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta charset="ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+
+	<ui:composition>
+		<div class="container">
+			#{noticia.obtenerNoticia()}
+			<h3>Titulo: #{noticia.nota.titulo}</h3>
+			<h4>Descripcion: #{noticia.nota.descripcion}</h4>
+			<h5>Fecha: #{noticia.nota.fecha}</h5>
+		</div>
+
+	</ui:composition>
+</body>
+</html>

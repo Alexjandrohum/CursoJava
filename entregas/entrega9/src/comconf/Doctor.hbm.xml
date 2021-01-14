@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 29, 2020, 6:24:39 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="comconf.Doctor" table="DOCTOR">
+		<id name="idDoctor" type="long">
+			<column name="ID_DOCTOR" precision="10" scale="0" />
+			<generator class="increment" />
+		</id>
+		<property name="nombre" type="string">
+			<column name="NOMBRE" length="100" />
+		</property>
+		<property name="apellidos" type="string">
+			<column name="APELLIDOS" length="250" />
+		</property>
+		<property name="direccion" type="string">
+			<column name="DIRECCION" length="250" />
+		</property>
+		<property name="telefono" type="string">
+			<column name="TELEFONO" length="250" />
+		</property>
+		<property name="rfc" type="string">
+			<column name="RFC" length="50" />
+		</property>
+		<property name="especialidad" type="string">
+			<column name="ESPECIALIDAD" length="100" />
+		</property>
+		<property name="sexo" type="string">
+			<column name="SEXO" length="50" />
+		</property>
+		<property name="correo" type="string">
+			<column name="CORREO" length="100" />
+		</property>
+		<property name="contra" type="string">
+			<column name="CONTRA" length="50" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,213 @@
+CREATE TABLE tadomicilio(
+FINUMERO NUMBER(10) PRIMARY KEY,
+FCCALLE VARCHAR(150),
+FCCOLONIA VARCHAR(150),
+FCESTADO VARCHAR(50),
+FICODIGOPOSTAL NUMBER(15),
+FIESTADODOMICILIO NUMBER(10)
+);
+
+CREATE SEQUENCE seq_idireccion START WITH 1 INCREMENT BY 1 NOMAXVALUE;
+
+SELECT * FROM tadomicilio;
+
+SELECT FINUMERO, FCCALLE, FCCOLONIA, FCESTADO, FICODIGOPOSTAL, FIESTADODOMICILIO FROM tadomicilio;
+
+SELECT FINUMERO, FCCALLE, FCCOLONIA, FCESTADO, FICODIGOPOSTAL, FIESTADODOMICILIO FROM tadomicilio WHERE FINUMERO = 1;
+
+
+
+CREATE PROCEDURE sp_getDireccionById(d_id OUT NUMBER, calle OUT VARCHAR, colonia OUT VARCHAR, estado OUT VARCHAR, postal OUT NUMBER, estadodomi OUT NUMBER)
+IS
+BEGIN
+    SELECT FINUMERO,FCCALLE,FCCOLONIA,FCESTADO,FICODIGOPOSTAL,FIESTADODOMICILIO
+    into d_id, calle, colonia, estado, postal, estadodomi 
+    FROM tadomicilio where FINUMERO = d_id;
+END;
+
+
+
+insert into tadomicilio(FINUMERO,FCCALLE,FCCOLONIA,FCESTADO,FICODIGOPOSTAL,FIESTADODOMICILIO) values(SEQ_IDIRECCION.nextval, 'calle','Lsazaro','puebla',76,23);
+insert into tadomicilio(FINUMERO,FCCALLE,FCCOLONIA,FCESTADO,FICODIGOPOSTAL,FIESTADODOMICILIO) values(SEQ_IDIRECCION.nextval, 'norte','sf','MExico',76,23);
+insert into tadomicilio(FINUMERO,FCCALLE,FCCOLONIA,FCESTADO,FICODIGOPOSTAL,FIESTADODOMICILIO) values(SEQ_IDIRECCION.nextval, 'sur','ewr','aca',76,23);
+
+
+SELECT * FROM tadomicilio;
+
+
+CREATE TABLE tabanco(
+FINUMERO NUMBER(10) PRIMARY KEY,
+FCNOMBRE VARCHAR(150),
+FCRFC VARCHAR(15),
+FCTELEFONO VARCHAR(15),
+FIESTADOBANCO NUMBER(10),
+FIDOMICILIO NUMBER(10),
+CONSTRAINT banco_domicilio_fk FOREIGN KEY ( FIDOMICILIO ) REFERENCES tadomicilio ( FINUMERO )
+);
+
+
+SELECT FINUMERO,FCCALLE,FCCOLONIA,FCESTADO,FICODIGOPOSTAL,FIESTADODOMICILIO
+    FROM tadomicilio where FINUMERO = 2;
+
+CREATE SEQUENCE seq_banco START WITH 1 INCREMENT BY 1 NOMAXVALUE;
+
+select * from tacliente;
+
+insert into tabanco(FINUMERO,FCNOMBRE,FCRFC,FCTELEFONO,FIESTADOBANCO,FIDOMICILIO) VALUES(SEQ_BANCO.nextval,'Bancomer','ygdvd','3241',1,1);
+
+
+CREATE TABLE tacliente(
+FINUMERO NUMBER(10) PRIMARY KEY,
+FCNOMBRE VARCHAR(150),
+FDFECHANACIMIENTO DATE,
+FCRFC VARCHAR(15),
+FIDOMICILIO NUMBER(10),
+FIESTADOCLIENTE NUMBER(11),
+FIBANCO NUMBER(10),
+CONSTRAINT cliente_banco_fk FOREIGN KEY ( FIBANCO ) REFERENCES tabanco ( FINUMERO ),
+CONSTRAINT cliente_domicilio_fk FOREIGN KEY ( FIDOMICILIO ) REFERENCES tadomicilio ( FINUMERO )
+);
+
+ALTER TABLE tacliente add FCAPELLIDOS VARCHAR(150);
+ALTER TABLE tacliente add FCSEXO VARCHAR(50);
+
+SELECT * FROM tadomicilio;
+CREATE SEQUENCE seq_cliente START WITH 1 INCREMENT BY 1 NOMAXVALUE;
+
+INSERT INTO tacliente(FINUMERO,FCNOMBRE,FDFECHANACIMIENTO,FCRFC,FIDOMICILIO,FIESTADOCLIENTE,FIBANCO, FCAPELLIDOS, FCSEXO) VALUES(SEQ_CLIENTE.nextval,'Alex','23-12-2019','dsfw',1,1,1,'Herrera', 'Masculimo');
+
+
+
+
+CREATE PROCEDURE sp_getCliente(
+numero IN NUMBER, 
+nombre OUT VARCHAR, 
+nacimiento OUT DATE, 
+rfc OUT VARCHAR, 
+domicilio OUT NUMBER, 
+estado OUT NUMBER, 
+banco OUT NUMBER, 
+apellidos OUT VARCHAR, 
+sexo OUT VARCHAR)
+IS
+BEGIN
+    SELECT FCNOMBRE,FDFECHANACIMIENTO,FCRFC,FIDOMICILIO,FIESTADOCLIENTE,FIBANCO, FCAPELLIDOS, FCSEXO
+    into nombre, nacimiento, rfc, domicilio, estado, banco, apellidos, sexo 
+    FROM tacliente 
+    where FINUMERO = numero;
+END;
+
+DELETE FROM tacliente where FINUMERO = 2;
+
+
+
+
+
+
+
+
+
+
+
+SELECT FINUMERO,FCNOMBRE,FDFECHANACIMIENTO,FCRFC,FIDOMICILIO,FIESTADOCLIENTE,FIBANCO, FCAPELLIDOS, FCSEXO
+    FROM tacliente 
+    where FINUMERO = 3;
+
+DECLARE
+numero NUMBER(10); 
+nombre VARCHAR(150); 
+nacimiento DATE; 
+rfc VARCHAR(150); 
+domicilio NUMBER(150); 
+estado NUMBER(110); 
+banco NUMBER(10); 
+apellidos VARCHAR(150); 
+sexo VARCHAR(50);
+begin
+numero := 3;
+DBMS_OUTPUT.PUT_LINE(id_doctor);
+
+
+sp_getCliente(numero,);
+
+DBMS_OUTPUT.PUT_LINE(numero);
+DBMS_OUTPUT.PUT_LINE(nombre);
+DBMS_OUTPUT.PUT_LINE(telefono);
+end;
+
+
+
+create or replace PROCEDURE sp_createCliente2(
+nombre IN VARCHAR, 
+nacimiento IN DATE, 
+rfc IN VARCHAR, 
+domicilio IN NUMBER, 
+estado IN NUMBER, 
+banco IN NUMBER, 
+apellidos IN VARCHAR, 
+sexo IN VARCHAR, 
+calle IN VARCHAR, 
+colonia IN VARCHAR, 
+estadodireccion IN VARCHAR, 
+postal IN NUMBER, 
+estadodomicilio IN NUMBER)
+IS
+id_temporal number;
+BEGIN
+
+    INSERT into tadomicilio(FINUMERO,FCCALLE,FCCOLONIA,FCESTADO,FICODIGOPOSTAL,FIESTADODOMICILIO) 
+    values(SEQ_IDIRECCION.nextval, calle,colonia,estadodireccion,postal,estadodomicilio) returning FINUMERO into id_temporal;
+
+    INSERT INTO tacliente(FINUMERO,FCNOMBRE,FDFECHANACIMIENTO,FCRFC,FIDOMICILIO,FIESTADOCLIENTE,FIBANCO, FCAPELLIDOS, FCSEXO) 
+    VALUES(SEQ_CLIENTE.nextval,nombre,nacimiento,rfc,id_temporal,estado,banco,apellidos, sexo);
+
+END;
+
+
+
+
+
+
+create or replace PROCEDURE sp_getCliente1(
+numero IN OUT NUMBER, 
+nombre OUT VARCHAR, 
+nacimiento OUT DATE, 
+rfc OUT VARCHAR, 
+domicilio OUT NUMBER, 
+estado OUT NUMBER, 
+banco OUT NUMBER, 
+apellidos OUT VARCHAR, 
+sexo OUT VARCHAR)
+IS
+BEGIN
+    SELECT FCNOMBRE,FDFECHANACIMIENTO,FCRFC,FIDOMICILIO,FIESTADOCLIENTE,FIBANCO, FCAPELLIDOS, FCSEXO
+    into nombre, nacimiento, rfc, domicilio, estado, banco, apellidos, sexo 
+    FROM tacliente 
+    where FINUMERO = numero;
+END;
+
+
+
+SELECT FCNOMBRE,FDFECHANACIMIENTO,FCRFC,FIDOMICILIO,FIESTADOCLIENTE,FIBANCO, FCAPELLIDOS, FCSEXO
+    FROM tacliente 
+    where FINUMERO = 7;
+
+
+create or replace PROCEDURE sp_getCliente2(
+numero IN OUT NUMBER, 
+nombre OUT VARCHAR, 
+nacimiento OUT DATE, 
+rfc OUT VARCHAR, 
+domicilio OUT NUMBER, 
+estado OUT NUMBER, 
+banco OUT NUMBER, 
+apellidos OUT VARCHAR, 
+sexo OUT VARCHAR)
+IS
+BEGIN
+    SELECT FINUMERO, FCNOMBRE,FDFECHANACIMIENTO,FCRFC,FIDOMICILIO,FIESTADOCLIENTE,FIBANCO, FCAPELLIDOS, FCSEXO
+    into numero, nombre, nacimiento, rfc, domicilio, estado, banco, apellidos, sexo 
+    FROM tacliente 
+    where FINUMERO = numero;
+END;
+
